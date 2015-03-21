@@ -3,7 +3,7 @@
 
 
 from tornado import web
-from control.blog import *
+from model.blog import *
 
 
 class BaseHandler(web.RequestHandler):

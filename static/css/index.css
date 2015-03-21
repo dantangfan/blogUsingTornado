@@ -1,0 +1,113 @@
+body {
+	font-size: 200%;
+	background-color: #785C48;
+	background-image: url('/static/images/index-bg.jpg');
+	background-repeat: no-repeat;
+	font-family: 'Ubuntu Mono', sans-serif;
+	margin-bottom: 50px;
+	margin-top: 0px;
+}
+div {
+	text-align: center;
+	margin-left: 20%;
+	margin-right: 20%;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+a:link {
+	text-decoration: none
+}
+a:visited {
+	text-decoration: none
+}
+a:active {
+	text-decoration: none
+}
+
+#name {
+	background-color: #78685D;
+	font-size: 180%;
+	color: #1A1410;
+}
+
+.hashtag {
+	background-color: #78685D;
+	color: #45352A;
+	font-size: 140%;
+	padding-bottom: 30px;
+}
+a.hashtag:hover {
+	text-decoration: underline;
+	color: #5F544C;
+}
+
+#bio {
+	background-color: #564234;
+	color: #FFFFFF;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+a.bio {
+	color: #AAA09A;
+}
+a.bio:hover {
+	text-decoration: underline;
+	color: #FFFFFF;
+}
+
+#footer {
+	padding-top: 30px;
+	font-size: 80%;
+}
+a.footer {
+	color: #FFFFFF;
+}
+a.footer:hover {
+	text-decoration: underline;
+	color: #FFFFFF;
+}
+
+.listcon {
+	text-align: left;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 50px;
+	color: #28201B;
+}
+a.ref {
+	color: #28201B;
+}
+a.ref:hover {
+	color: #FFFFFF;
+}
+
+#programminglanguages {
+	background-color: #866C5A;
+}
+#frameworks {
+	background-color: #796151;
+}
+#databasesoftware {
+	background-color: #866C5A;
+}
+#syntax {
+	background-color: #796151;
+}
+#shellscripting {
+	background-color: #866C5A;
+}
+
+.left {
+	float: left;
+}
+
+.inblock {
+	text-align: left;
+	padding-left: 70px;
+}
+.blockt {
+	font-size: 80%;
+	font-weight: bold;
+	color: #48372B;
+}

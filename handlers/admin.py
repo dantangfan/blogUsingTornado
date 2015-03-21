@@ -3,7 +3,7 @@
 
 
 from tornado import web
-from control.admin import *
+from model.admin import *
 from config import sitename
 
 
@@ -58,7 +58,8 @@ class ManageArticlesHandler(BaseHandler):
 
 class DeleteArticleHandler(BaseHandler):
     def post(self, *args, **kwargs):
-        pass
+        article_id = self.get_argument('article_id', None)
+        return delete_article(article_id)
 
 
 class NewArticleHandler(BaseHandler):
@@ -66,7 +67,10 @@ class NewArticleHandler(BaseHandler):
         return self.render('admin/newArticle.html')
 
     def post(self, *args, **kwargs):
-        pass
+        title = self.get_argument('title', None)
+        summary = self.get_argument('summary', None)
+        content = self.get_argument('content', None)
+        return new_article(title, summary, content)
 
 
 class EditArticleHandler(BaseHandler):
@@ -79,7 +83,8 @@ class EditArticleHandler(BaseHandler):
 
 class DeleteCommentHandler(BaseHandler):
     def post(self, *args, **kwargs):
-        pass
+        cid = self.get_argument('cid', None)
+        return delete_comment(cid)
 
 
 class ManageTimeLine(BaseHandler):
