@@ -9,8 +9,8 @@ from config import sitename
 
 class Admin:
     # use password hash instead
-    password1 = "123456789"
-    password2 = "987654321"
+    password1 = "123"
+    password2 = "321"
     email = "moument@gmail.com"
     auth_info = {}
 
@@ -35,12 +35,13 @@ class LoginHandler(web.RequestHandler):
     def post(self, *args, **kwargs):
         password1 = self.get_argument('password1', None)
         password2 = self.get_argument('password2', None)
+        print password1,password2
         if password1 != Admin.password1 or password2 != Admin.password2:
-            return self.redirect('admin/login.html')
-        self.set_secure_cookie(sitename)
+            return self.redirect('/admin/login')
+        self.set_secure_cookie(sitename, password1)
         token = self.get_secure_cookie(sitename)
         Admin.auth_info[token] = {'user': 'admin'}
-        return self.render('admin/manage.html')
+        return self.redirect('/admin/manage')
 
 
 class LogoutHandler(BaseHandler):
@@ -56,8 +57,11 @@ class ManageHandler(BaseHandler):
 
 
 class ManageArticlesHandler(BaseHandler):
-    def get(self, *args, **kwargs):
-        return self.render('admin/manageArticles.html')
+    def get(self, page=1):
+        rst = manage_article(page)
+        if not rst['err']:
+            return self.render('404.html')
+        return self.render('admin/manageArticle.html', articles=rst['articles'])
 
 
 class DeleteArticleHandler(BaseHandler):
@@ -93,7 +97,7 @@ class DeleteCommentHandler(BaseHandler):
 
 class ManageTimeLine(BaseHandler):
     def get(self, *args, **kwargs):
-        return self.render('admin/manageTimeLine.html')
+        return self.render('admin/manageTimeline.html')
 
 
 class DeleteTimeLine(BaseHandler):

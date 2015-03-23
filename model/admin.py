@@ -6,6 +6,21 @@ import datetime
 from config import page_count
 
 
+def manage_article(page):
+    try:
+        page = int(page)
+        if page < 1:
+            page = 0
+        else:
+            page = page-1
+        sql = "select title from article order by publish_time limit %s,%s"
+        articles = db.query(sql, page*10, 10)
+        return {'err': 0, 'articles': articles}
+    except Exception, e:
+        print e
+        return {'err': -1, 'err_msg': 'system error'}
+
+
 def delete_article(article_id):
     try:
         article_id = int(article_id)

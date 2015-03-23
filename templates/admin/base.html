@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dantangfan | Admin</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="{{static_url('bootstrap/css/bootstrap.min.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{static_url('admin/css/base.css')}}">
+	<script src="{{static_url('js/jquery.min.js')}}" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="{{static_url('bootstrap/js/bootstrap.min.js')}}"></script>
+</head>
+<body>
+	<header id="header">
+		<div class="container-flow">
+			<div class="col-md-3 col-sm-4 col-xs-5">
+				<h3>Admin System</h3>
+			</div>
+			<div class="col-md-6 col-sm-4 col-xs-2"></div>
+			<div class="col-md-3 col-sm-4 col-xs-5" style="margin-top:15px;">
+				<a href="/admin/logout" class="btn btn-success" style="float:right;margin-left: 10px; "><span class="glyphicon glyphicon-log-out"></span>退出</a>
+				<a href="/" class="btn btn-success" style="float:right;"><span class="glyphicon glyphicon-th-large"></span>去主页</a>
+			</div>
+		</div>	
+	</header><!-- /header -->
+	<div class="container-flow">
+		<div class="col-md-2 col-sm-3 col-xs-2" id="aside">
+			<ul>
+				<li>
+					<div>
+						<a href="/admin/manage">
+							<span class="glyphicon glyphicon-home"></span>概览
+						</a>
+					</div>
+				</li>
+				<li>
+					<div>
+						<a href="/admin/articles">
+							<span class="glyphicon glyphicon-list-alt"></span>文章
+						</a>
+					</div>
+				</li>
+				<li>
+					<div>
+						<a href="/admin/manage">
+							<span class="glyphicon glyphicon-th-list"></span>分类
+						</a>
+					</div>
+				</li>
+				<li>
+					<div>
+						<a href="/admin/timeline">
+							<span class="glyphicon glyphicon-time"></span>时间轴
+						</a>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div id="section" class="col-md-10 col-sm-9 col-xs-10">
+		{%block main%}
+			main Page
+		{%end block%}
+		</div>
+	</div>
+	<script type="text/javascript">
+	$('li').click(function(event) {
+		url = $(this).find('a').attr('href');
+		window.location.pathname = url;
+	});
+	$(function() {
+		url = window.location.pathname
+		var index = 0;
+		if(url=="/admin/articles")
+			index=1;
+		else if(url=="/admin/timeline")
+			index=3
+		$('li:eq('+index+')').addClass('active');
+	});
+	</script>
+</body>
+</html>
