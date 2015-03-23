@@ -1,4 +1,13 @@
 {%extends base.html%}
 {%block main%}
-
+	<div class="col-md-2 col-sm-2 col-xs-1"></div>
+	<div class="col-md-8 col-sm-8 col-xs-10" style="margin-top:20px;">
+		<a href="/admin/article/new" class="btn btn-warning" style="float:right">新建</a>
+		<ul>
+		{%for article in articles%}
+			<li>{{article['title']}}</li>
+		{%end%}
+		</ul>
+	</div>
+	<div class="col-md-2 col-sm-2 col-xs-1"></div>
 {%end block%}

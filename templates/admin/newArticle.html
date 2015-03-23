@@ -1,7 +1,9 @@
 {%extends base.html%}
 {%block main%}
-<div class="col-md-6 col-sm-6 col-xs-12">
-	<textarea name="newArticle"></textarea>
+<div class="col-md-6 col-sm-6 col-xs-12" style="margin-top:20px;">
+	<textarea name="newArticle" style="width: 100%;max-width: 100%;min-height: 570px;"></textarea>
 </div>
-<div class="col-md-6 col-sm-6 col-xs-12"></div>
+<div class="col-md-6 col-sm-6 col-xs-12" style="margin-top:20px;">
+	<div id="preview" style="border:1px solid #ABABAB;border-radius: 1%;width: 100%;min-height: 570px;"></div>
+</div>
 {%end block%}

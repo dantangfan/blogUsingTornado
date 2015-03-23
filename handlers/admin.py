@@ -59,8 +59,9 @@ class ManageHandler(BaseHandler):
 class ManageArticlesHandler(BaseHandler):
     def get(self, page=1):
         rst = manage_article(page)
-        if not rst['err']:
-            return self.render('404.html')
+        if rst['err']:
+            #return self.render('404.html')
+            return self.write('<h1>404<h1>')
         return self.render('admin/manageArticle.html', articles=rst['articles'])
 
 
