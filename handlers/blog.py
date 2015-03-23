@@ -69,7 +69,7 @@ class TimeLineHandler(BaseHandler):
 
 handlers = [
     (r'/', IndexHandler),
-    (r'/articles/', ListArticleHandler),
+    (r'/articles', ListArticleHandler),
     (r'/article/(\d+)/', ShowArticleHandler),
     (r'/comment', CommentHandler),
     (r'/project', ShowProjectHandler),

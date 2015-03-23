@@ -17,15 +17,19 @@ class Admin:
 
 class BaseHandler(web.RequestHandler):
     def prepare(self):
-        token = self.get_secure_cookie(sitename)
-        if token in Admin.auth_info:
-            self.user = Admin.auth_info[token]['user']
-            return
-        self.redirect('/login')
+        try:
+            token = self.get_secure_cookie(sitename)
+            if token in Admin.auth_info:
+                self.user = Admin.auth_info[token]['user']
+                return
+            self.redirect('/admin/login')
+        except Exception, e:
+            print e
+            self.redirect('/admin/login')
 
 
 class LoginHandler(web.RequestHandler):
-    def get(self, *args, **kwargs):
+    def get(self):
         return self.render('admin/login.html')
 
     def post(self, *args, **kwargs):
@@ -48,7 +52,7 @@ class LogoutHandler(BaseHandler):
 
 class ManageHandler(BaseHandler):
     def get(self, *args, **kwargs):
-        return self.render('amdmin/manage.html')
+        return self.render('admin/manage.html')
 
 
 class ManageArticlesHandler(BaseHandler):
@@ -98,7 +102,7 @@ class DeleteTimeLine(BaseHandler):
 
 
 handlers=[
-    (r'/amdin/login', LoginHandler),
+    (r'/admin/login', LoginHandler),
     (r'/admin/logout', LogoutHandler),
     (r'/admin/manage', ManageHandler),
     (r'/admin/articles', ManageArticlesHandler),
@@ -106,5 +110,5 @@ handlers=[
     (r'/admin/article/delete', DeleteArticleHandler),
     (r'/admin/comment/delete', DeleteCommentHandler),
     (r'/admin/timeline', ManageTimeLine),
-    (r'/amdin/timeline/delete', ManageTimeLine)
+    (r'/admin/timeline/delete', ManageTimeLine)
 ]
