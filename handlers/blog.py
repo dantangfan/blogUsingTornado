@@ -16,11 +16,12 @@ class IndexHandler(BaseHandler):
 
 
 class ListArticleHandler(BaseHandler):
-    def get(self, page=1):
+    def get(self):
+        page = self.get_argument("page", '1')
         page = correct_page(page)
         rst = get_article_list(page)
         if rst['err'] != 0:
-            return self.render('404.html')
+            return self.write('404')
         return self.render('listArticle.html',
                            articles=rst['articles'],
                            cur_page=rst['cur_page'],
@@ -32,21 +33,23 @@ class ShowArticleHandler(BaseHandler):
         article = get_article(article_id)
         if not article:
             return self.redirect('/')
-        return self.render('article.html', article=article)
+        comments = get_comment(article_id)
+        return self.render('article.html', article=article, comments=comments)
 
 
 class CommentHandler(BaseHandler):
     def post(self):
         article_id = self.get_argument('article_id', None)
-        user_name = self.get_argument('user_name', None)
-        user_email = self.get_argument('user_email', None)
+        user_name = self.get_argument('username', None)
+        user_email = self.get_argument('email', None)
         web_site = self.get_argument('website', None)
-        article_id = self.get_argument('article_id', None)
-        comment = self.get_argument('comment', None)
+        comment = self.get_argument('content', None)
         to_cid = self.get_argument('to_cid', None)
+        to_cname = self.get_argument('to_cname', None)
+        print article_id,user_name,user_email,comment
         if user_name is None or user_email is None or comment is None:
             return self.write({'err': -1, 'err_msg': '您需要填写昵称、邮箱和评论'})
-        rst =  add_comment(article_id, user_email, web_site, article_id, comment, to_cid)
+        rst = add_comment(article_id, user_name, user_email, web_site, comment, to_cid, to_cname)
         return rst
 
 
@@ -70,7 +73,7 @@ class TimeLineHandler(BaseHandler):
 handlers = [
     (r'/', IndexHandler),
     (r'/articles', ListArticleHandler),
-    (r'/article/(\d+)/', ShowArticleHandler),
+    (r'/article/(\d+)', ShowArticleHandler),
     (r'/comment', CommentHandler),
     (r'/project', ShowProjectHandler),
     (r'/aboutme', ShowAboutMeHandler),

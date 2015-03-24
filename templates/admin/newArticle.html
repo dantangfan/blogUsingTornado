@@ -1,12 +1,12 @@
 {%extends base.html%}
 {%block main%}
-<div class="col-md-6 col-sm-6 col-xs-12" style="margin-top:20px;" >
+<div class="col-md-6 col-sm-6 col-xs-12">
 	<div class="input-group">
 		<span class="input-group-addon" id="basic-addon1">题目</span>
 		<input type="text" name="title" id='title' class="form-control" placeholder="title" aria-describedby="basic-addon1">
 	</div>
 </div>
-<div class="col-md-6 col-sm-6 col-xs-12" style="margin-top:20px;">
+<div class="col-md-6 col-sm-6 col-xs-12">
 	<div class="input-group">
 		<span class="input-group-addon" id="basic-addon2">摘要</span>
 		<textarea type="text" name="summary" id="summary" class="form-control" placeholder="summary" aria-describedby="basic-addon2"></textarea>
@@ -50,7 +50,8 @@
 			title = $('#title').val();
 			summary = $("#summary").val();
 			content = $("#textarea").val();
-			if (title==""||summary==""||content==""){
+			html = $("#preview").html();
+			if (title==""||summary==""||content=="" || html==""){
 				alert('不能为空!!');
 				return false;
 			}
@@ -58,7 +59,7 @@
 				url: '/admin/article/new',
 				type: 'POST',
 				dataType: 'json',
-				data: {title:title, summary:summary,content:content},
+				data: {title:title, summary:summary,content:content,html:html},
 			})
 			.done(function(data) {
 				console.log("success");

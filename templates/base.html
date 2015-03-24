@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dantangfan | blog</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="{{static_url('bootstrap/css/bootstrap.min.css')}}">
+	<script src="{{static_url('js/jquery.min.js')}}" type="text/javascript" async defer></script>
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	<script src="{{static_url('bootstrap/js/bootstrap.min.js')}}" type="text/javascript" async defer></script>
+	<script src="{{static_url('js/marked.js')}}" type="text/javascript" async defer></script>
+</head>
+<body>
+{%block header%}
+<style type="text/css" media="screen">
+	#header a.astyle{
+		color:gray;
+		margin:0;
+		padding:0;
+		border:0;
+		display:inline-block;
+	}
+	#header a:hover{
+		border-bottom: 2px solid pink;
+		border-radius: 0;
+	}
+</style>
+<div class="container">
+	<div class="row" id="header">
+		<div class="col-md-4 col-sm-4 col-xs-4"></div>
+		<div class="col-md-4 col-sm-4 col-xs-4" style="text-align: center;margin-top: 10px;">
+			<a href="/" class="btn astyle">首页</a>
+			<a href="#" class="btn astyle">文章</a>
+			<a href="#" class="btn astyle">分类</a></li>
+			<a href="#" class="btn astyle">留言</a></li>
+			<a href="/admin/login" class="btn astyle">后台</a>
+		</div>
+		<div class="col-md-4 col-sm-4 col-xs-4"></div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-4 col-sm-4 col-xs-4"></div>
+		<div class="col-md-4 col-sm-4 col-xs-4" style="text-align: center;">
+			<div class="page-header">
+				<h1>Dangtangfan <small>Blog</small></h1>
+			</div>
+		</div>
+		<div class="col-md-4 col-sm-4 col-xs-4"></div>
+	</div>
+	{%end%}
+	{%block main%}
+	{%end%}
+	<div class="row" id="footer">
+		<div class="col-md-4 col-sm-4 col-xs-4"></div>
+		<div class="col-md-4 col-sm-4 col-xs-4" style="text-align: center;color:gray;margin-bottom: 30px;">
+			<p>AUTHOR <span class="glyphicon glyphicon-record"></span> 蛋汤饭</p>
+			<p>Copywrite 2015</p>
+		</div>
+		<div class="col-md-4 col-sm-4 col-xs-4"></div>
+	</div>
+</div>
+</body>
+</html>

@@ -12,7 +12,8 @@ create table article(
     title char(40) not null,
     publish_time datetime not null,
     summary text not null,
-    content text not null
+    content text not null,
+    html text not null
 )engine=innodb default charset=utf8;
 
 
@@ -24,7 +25,8 @@ create table comment(
     website text,
     create_at datetime not null,
     content text not null,
-    to_comment_id int not null
+    to_comment_id int,
+    to_comment_username text
 )engine=innodb default charset=utf8;
 
 

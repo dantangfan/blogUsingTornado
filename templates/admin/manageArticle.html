@@ -1,13 +1,21 @@
 {%extends base.html%}
 {%block main%}
-	<div class="col-md-2 col-sm-2 col-xs-1"></div>
-	<div class="col-md-8 col-sm-8 col-xs-10" style="margin-top:20px;">
-		<a href="/admin/article/new" class="btn btn-warning" style="float:right">新建</a>
-		<ul>
-		{%for article in articles%}
-			<li>{{article['title']}}</li>
-		{%end%}
-		</ul>
+	<div class="col-md-1 col-sm-1 col-xs-1"></div>
+	<div class="col-md-9 col-sm-9 col-xs-10" style="margin-top: 5%;">
+		<div class="article-list">
+			<ul class="list-group">
+			{%for article in articles%}
+			<li class="list-group-item" style="border-left:0;border-right:0;border-radius: 0;">
+				<a href="/article/{{article['id']}}">
+				{{article['title']}}
+				<span style="float:right;">{{article['publish_time']}}</span>
+				</a>
+			</li>
+			{%end%}
+			</ul>
+		</div>
 	</div>
-	<div class="col-md-2 col-sm-2 col-xs-1"></div>
+	<div class="col-md-2 col-sm-2 col-xs-1">
+		<a href="/admin/article/new" class="btn btn-primary btn-warning">新建</a>
+	</div>
 {%end block%}

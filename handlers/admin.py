@@ -63,7 +63,6 @@ class ManageArticlesHandler(BaseHandler):
     def get(self, page=1):
         rst = manage_article(page)
         if rst['err']:
-            #return self.render('404.html')
             return self.write('<h1>404<h1>')
         return self.render('admin/manageArticle.html', articles=rst['articles'])
 
@@ -82,7 +81,8 @@ class NewArticleHandler(BaseHandler):
         title = self.get_argument('title', None)
         summary = self.get_argument('summary', None)
         content = self.get_argument('content', None)
-        rst = new_article(title, summary, content)
+        html = self.get_argument('html', None)
+        rst = new_article(title, summary, content, html)
         return self.write(rst)
 
 

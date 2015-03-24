@@ -1,0 +1,82 @@
+{%extends base.html%}
+{%block main%}
+<div class="row">
+	<div class="col-md-1 col-sm-1 col-xs-1"></div>
+	<div class="col-md-10 col-sm-10 col-xs-10" style="margin-bottom: 20px;">
+		<h2 style="text-align: center;">{{article['title']}}</h2>
+		<p style="text-align: center;color:gray;">{{article.publish_time}}<p>
+		<div class="content">
+			{{article['html']}}
+		</div>
+		<br>
+		<hr>
+		<div class="comments">
+		<h3>评论</h3>
+		<br>
+		{%for comment in comments%}
+		<div class="row">
+			<div class="col-md-1 col-sm-1 col-xs-1">{{comment.user_name}}</div>
+			<div class="col-md-11 col-sm-11 col-xs-11" style="text-align: left;background: #F2F2F2;padding-bottom: 10px;">
+				<div class="row">
+					<div class="col-md-6 col-sm-6 col-xs-6" style="float:left;">
+					{{comment.create_at}}
+					</div>
+					<div class="col-md-6 col-sm-6 col-xs-6">
+						<a href="#content" class="btn comment" name="{{comment.user_name}}" id="{{comment.id}}" style="float:right;">回复</a>
+					</div>
+				</div>
+				<div id="{{comment.id}}" >
+					{{comment.content}}
+				</div>
+			</div>
+		</div>
+		<br>
+		{%end%}
+		<form action="/comment" method="POST">
+			<input type="hidden" name="article_id" value="{{article.id}}">
+			<input type="hidden" name="to_cid" id="to_cid">
+			<input type="hidden" name="to_cname" id="to_cname">
+			<div class="input-group" style="width: 50%;">
+				<span class="input-group-addon glyphicon glyphicon-envelope" id="basic-addon1"></span>
+				<input type="text" class="form-control" id="email" name="email" placeholder="Enter email" aria-describedby="basic-addon1">
+			</div>
+			<br>
+			<div class="input-group" style="width: 50%;">
+				<span class="input-group-addon glyphicon glyphicon-user" aria-describedby="basic-addon2"></span>
+				<input type="text" class="form-control" id="username" name="username" placeholder="username" aria-describedby="basic-addon2">
+			</div>
+			<br>
+			<textarea name="content" id="content" rows=6 style="width:80%;"></textarea>
+			<br>
+			<button type="submit" id="submit" class="btn btn-default">Submit</button>
+		</form>
+		</div>
+	</div>
+	<div class="col-md-1 col-sm-1 col-xs-1"></div>
+</div>
+<script type="text/javascript">
+	$(function() {
+		$("#submit").click(function(){
+			username = $("#username").val();
+			email = $("#email").val();
+			content = $("#content");
+			if(username=="" || content==""){
+				alert("每一项都不能为空哦！");
+				return false;
+			}
+			var email_reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+			if(!email_reg.test(email)){
+				alert("emali格式好像不对。");
+				return false;
+			}
+			return true;
+		});
+		$(".comment").click(function(){
+			to_id = $(this).attr('id');
+			to_name = $(this).attr('name');
+			html = "<a href=\"#" + to_id +"\">@" + to_name +"</a><br>";
+			$("#content").val(html);
+		});
+	});
+</script>
+{%end%}

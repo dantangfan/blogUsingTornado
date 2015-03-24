@@ -13,7 +13,7 @@ def manage_article(page):
             page = 0
         else:
             page = page-1
-        sql = "select title from article order by publish_time limit %s,%s"
+        sql = "select id, title, publish_time from article order by publish_time limit %s,%s"
         articles = db.query(sql, page*10, 10)
         return {'err': 0, 'articles': articles}
     except Exception, e:
@@ -37,13 +37,13 @@ def delete_article(article_id):
     return {'err': 0}
 
 
-def new_article(title, summary, content):
-    if title is None or summary is None or content is None:
+def new_article(title, summary, content, html):
+    if title is None or summary is None or content is None or html is None:
         return {'err': -1, 'err_msg': '标题、概要、内容都不能为空'}
     try:
         time = datetime.datetime.now()
-        sql = "insert into article(title, publish_time, summary, content) values(%s, %s, %s, %s)"
-        db.execute(sql, title, time, summary, content)
+        sql = "insert into article(title, publish_time, summary, content, html) values(%s, %s, %s, %s, %s)"
+        db.execute(sql, title, time, summary, content, html)
         return {'err': 0}
     except Exception, e:
         print e

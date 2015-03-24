@@ -21,6 +21,7 @@ class Application(web.Application):
             static_path=os.path.join(os.path.dirname(__file__), 'static'),
             cookie_secret="you will never guess",
             login_url='/login',
+            autoescape=None,
             ui_modules=ui_modules,
         )
         super(Application, self).__init__(handlers, **settings)
