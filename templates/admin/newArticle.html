@@ -1,9 +1,23 @@
 {%extends base.html%}
 {%block main%}
-<div class="col-md-6 col-sm-6 col-xs-12" style="margin-top:20px;">
-	<textarea name="newArticle" style="width: 100%;max-width: 100%;min-height: 570px;"></textarea>
+<div class="col-md-6 col-sm-6 col-xs-12" style="margin-top:20px;" >
+	<div class="input-group">
+		<span class="input-group-addon" id="basic-addon1">题目</span>
+		<input type="text" name="title" class="form-control" placeholder="title" aria-describedby="basic-addon1">
+	</div>
 </div>
 <div class="col-md-6 col-sm-6 col-xs-12" style="margin-top:20px;">
-	<div id="preview" style="border:1px solid #ABABAB;border-radius: 1%;width: 100%;min-height: 570px;"></div>
+	<div class="input-group">
+		<span class="input-group-addon" id="basic-addon2">摘要</span>
+		<textarea type="text" name="summary" class="form-control" placeholder="summary" aria-describedby="basic-addon2"></textarea>
+	</div>
 </div>
+<div class="col-md-6 col-sm-6 col-xs-12" style="margin-top:20px;" id="editor">
+	<textarea name="content" id="textarea" style="width: 100%;max-width: 100%;min-height: 600px;"></textarea>
+</div>
+<div class="col-md-6 col-sm-6 col-xs-12" style="margin-top:20px;">
+	<div id="preview" style="border:1px solid #ABABAB;border-radius: 1%;width: 100%;min-height: 600px;"></div>
+</div>
+<script src="{{static_url('js/marked.js')}}" type="text/javascript" charset="utf-8" async defer></script>
+<script src="{{static_url('js/editor.js')}}" type="text/javascript" charset="utf-8" async defer></script>
 {%end block%}
