@@ -3,13 +3,13 @@
 <div class="col-md-6 col-sm-6 col-xs-12" style="margin-top:20px;" >
 	<div class="input-group">
 		<span class="input-group-addon" id="basic-addon1">题目</span>
-		<input type="text" name="title" class="form-control" placeholder="title" aria-describedby="basic-addon1">
+		<input type="text" name="title" id='title' class="form-control" placeholder="title" aria-describedby="basic-addon1">
 	</div>
 </div>
 <div class="col-md-6 col-sm-6 col-xs-12" style="margin-top:20px;">
 	<div class="input-group">
 		<span class="input-group-addon" id="basic-addon2">摘要</span>
-		<textarea type="text" name="summary" class="form-control" placeholder="summary" aria-describedby="basic-addon2"></textarea>
+		<textarea type="text" name="summary" id="summary" class="form-control" placeholder="summary" aria-describedby="basic-addon2"></textarea>
 	</div>
 </div>
 <div class="col-md-6 col-sm-6 col-xs-12" style="margin-top:20px;" id="editor">
@@ -17,7 +17,68 @@
 </div>
 <div class="col-md-6 col-sm-6 col-xs-12" style="margin-top:20px;">
 	<div id="preview" style="border:1px solid #ABABAB;border-radius: 1%;width: 100%;min-height: 600px;"></div>
+	<br>
+	<button type="submit" id="submit" class="btn btn-primary">立即发布</button>
+	<a id="modal-782360" href="#modal-container-782360" role="button" class="btn" data-toggle="modal">全文预览</a>
+	<div class="modal fade" id="modal-container-782360" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:100%;">
+		<div class="modal-dialog" style="width:70%;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h2 class="modal-title" id="myModalLabel">
+					</h2>
+				</div>
+				<div class="modal-body">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 <script src="{{static_url('js/marked.js')}}" type="text/javascript" charset="utf-8" async defer></script>
 <script src="{{static_url('js/editor.js')}}" type="text/javascript" charset="utf-8" async defer></script>
+<script type="text/javascript">
+	$(function() {
+		$('#modal-782360').click(function(event) {
+			$('.modal-title').html($('#title').val());
+			$('.modal-title').css('text-align','center');
+			$('.modal-body').html($('#preview').html());
+		});
+		$('#submit').click(function(event) {
+			title = $('#title').val();
+			summary = $("#summary").val();
+			content = $("#textarea").val();
+			if (title==""||summary==""||content==""){
+				alert('不能为空!!');
+				return false;
+			}
+			$.ajax({
+				url: '/admin/article/new',
+				type: 'POST',
+				dataType: 'json',
+				data: {title:title, summary:summary,content:content},
+			})
+			.done(function(data) {
+				console.log("success");
+				if(data['err']!=0){
+					alert(data['err_msg']);
+					return false;
+				}
+				else{
+					window.location.pathname = "/admin/articles";
+				}
+			})
+			.fail(function(data) {
+				alert(data);
+				return false;
+				console.log("error");
+			})
+			.always(function() {
+				console.log("complete");
+			});
+		});
+	});
+</script>
 {%end block%}

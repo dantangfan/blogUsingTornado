@@ -5,6 +5,9 @@
 from tornado import web
 from model.admin import *
 from config import sitename
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 
 class Admin:
@@ -79,7 +82,8 @@ class NewArticleHandler(BaseHandler):
         title = self.get_argument('title', None)
         summary = self.get_argument('summary', None)
         content = self.get_argument('content', None)
-        return new_article(title, summary, content)
+        rst = new_article(title, summary, content)
+        return self.write(rst)
 
 
 class EditArticleHandler(BaseHandler):
@@ -93,7 +97,8 @@ class EditArticleHandler(BaseHandler):
 class DeleteCommentHandler(BaseHandler):
     def post(self, *args, **kwargs):
         cid = self.get_argument('cid', None)
-        return delete_comment(cid)
+        rst = delete_comment(cid)
+        return self.write(rst)
 
 
 class ManageTimeLine(BaseHandler):

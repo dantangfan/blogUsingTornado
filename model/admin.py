@@ -43,7 +43,7 @@ def new_article(title, summary, content):
     try:
         time = datetime.datetime.now()
         sql = "insert into article(title, publish_time, summary, content) values(%s, %s, %s, %s)"
-        db.execute(sql, (title, time, summary, content))
+        db.execute(sql, title, time, summary, content)
         return {'err': 0}
     except Exception, e:
         print e
